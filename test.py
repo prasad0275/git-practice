@@ -4,31 +4,6 @@ import xml.etree.ElementTree as ET
 import xmltodict
 # import xmltojson
 
-def xml_to_dict(element):
-    """
-    Convert an ElementTree element to a dictionary.
-    """
-    def recursive_dict(element):
-        return element.tag, {
-            "attributes": ''.join(element.attrib),
-            "text": element.text,
-            "children": [recursive_dict(child) for child in element]
-        }
-
-    _, root_dict = recursive_dict(element)
-    return root_dict
-
-def convert_xml_to_json(xml_file_path, json_file_path):
-    """
-    Convert an XML file to a JSON file.
-    """
-    tree = ET.parse(xml_file_path)
-    root = tree.getroot()
-    root_dict = xml_to_dict(root)
-
-    with open(json_file_path, "w", encoding="utf-8") as json_file:
-        json.dump(root_dict, json_file, ensure_ascii=False, indent=4)
-
 def recur(child):
     # if not isinstance(child, ET.Element):
     #     return print("at end type : ", type(child))
